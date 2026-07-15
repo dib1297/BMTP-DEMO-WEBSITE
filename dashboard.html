@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile | বারো মাসে তেরো পার্বণ</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Sans+Bengali:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css?v=1.1.5">
+    <link rel="stylesheet" href="join.css?v=1.0.0">
+    
+    <style>
+        body {
+            background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+            margin: 0;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* Animated Background Elements */
+        body::before, body::after {
+            content: '';
+            position: fixed;
+            border-radius: 50%;
+            z-index: -1;
+            filter: blur(80px);
+            opacity: 0.5;
+            animation: float 10s infinite alternate ease-in-out;
+        }
+        body::before {
+            width: 400px;
+            height: 400px;
+            background: rgba(255, 107, 0, 0.15); /* Primary color */
+            top: -100px;
+            left: -100px;
+        }
+        body::after {
+            width: 300px;
+            height: 300px;
+            background: rgba(0, 123, 255, 0.1);
+            bottom: 50px;
+            right: -50px;
+            animation-delay: -5s;
+        }
+        @keyframes float {
+            0% { transform: translateY(0) scale(1); }
+            100% { transform: translateY(-30px) scale(1.1); }
+        }
+
+        .profile-container {
+            max-width: 650px;
+            margin: 0 auto 60px auto;
+            background: rgba(255, 255, 255, 0.8); /* Glassmorphism */
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 24px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05), 0 5px 15px rgba(0,0,0,0.03);
+            overflow: hidden;
+            position: relative;
+            transform: translateY(20px);
+            opacity: 0;
+            animation: slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes slideUpFade {
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .profile-header {
+            background: linear-gradient(135deg, var(--color-primary), #ff8c42);
+            height: 160px;
+            position: relative;
+            overflow: hidden;
+        }
+        /* Header decorative waves */
+        .profile-header::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: -10%;
+            width: 120%;
+            height: 60px;
+            background: rgba(255,255,255, 0.2);
+            border-radius: 50%;
+            transform: rotate(-3deg);
+        }
+
+        .profile-avatar-wrapper {
+            position: relative;
+            margin: -65px auto 0 auto;
+            width: 130px;
+            height: 130px;
+            background: #fff;
+            border-radius: 50%;
+            padding: 6px;
+            box-shadow: 0 8px 25px rgba(255, 107, 0, 0.25);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            z-index: 2;
+        }
+        .profile-avatar-wrapper:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 30px rgba(255, 107, 0, 0.35);
+        }
+
+        .profile-avatar {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--color-secondary), #2a3d66);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            color: #fff;
+            font-weight: 800;
+            overflow: hidden;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+            position: relative;
+        }
+        /* Avatar Inner Glow */
+        .profile-avatar::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: 50%;
+            box-shadow: inset 0 0 20px rgba(255,255,255,0.3);
+        }
+
+        .profile-body {
+            padding: 20px 45px 45px 45px;
+            text-align: center;
+        }
+        .profile-name {
+            font-size: 2rem;
+            font-family: var(--font-heading);
+            color: var(--color-text-dark);
+            margin-bottom: 5px;
+            font-weight: 800;
+            background: linear-gradient(90deg, #333, #666);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .profile-designation {
+            font-size: 1.15rem;
+            color: var(--color-primary);
+            font-weight: 600;
+            margin-bottom: 35px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            display: inline-block;
+            padding: 5px 15px;
+            background: rgba(255, 107, 0, 0.08);
+            border-radius: 20px;
+        }
+
+        .profile-details {
+            text-align: left;
+            background: transparent;
+            border: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+        .detail-item {
+            display: flex;
+            align-items: center;
+            padding: 20px 25px;
+            background: #fff;
+            border-radius: 16px;
+            border: 1px solid rgba(0,0,0,0.03);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .detail-item::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0; bottom: 0;
+            width: 4px;
+            background: var(--color-primary);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+            transform-origin: bottom;
+        }
+        .detail-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+            border-color: rgba(255, 107, 0, 0.2);
+        }
+        .detail-item:hover::before {
+            transform: scaleY(1);
+        }
+
+        .detail-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, rgba(255,107,0,0.1), rgba(255,107,0,0.2));
+            color: var(--color-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            margin-right: 20px;
+            flex-shrink: 0;
+            transition: transform 0.3s ease;
+        }
+        .detail-item:hover .detail-icon {
+            transform: rotate(10deg) scale(1.1);
+        }
+
+        .detail-content {
+            flex: 1;
+        }
+        .detail-label {
+            font-size: 0.75rem;
+            color: #888;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+        .detail-value {
+            font-size: 1.15rem;
+            color: var(--color-text-dark);
+            font-weight: 600;
+            word-break: break-word;
+        }
+        .aadhar-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .eye-toggle {
+            cursor: pointer;
+            color: #aaa;
+            padding: 8px;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            background: #f9f9f9;
+            border-radius: 50%;
+            width: 35px; height: 35px;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .eye-toggle:hover {
+            color: #fff;
+            background: var(--color-primary);
+            box-shadow: 0 4px 10px rgba(255, 107, 0, 0.3);
+        }
+
+        .loader-overlay {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(255,255,255,0.8);
+            backdrop-filter: blur(5px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(255, 107, 0, 0.1);
+            border-left-color: var(--color-primary);
+            border-radius: 50%;
+            animation: spin 1s cubic-bezier(0.5, 0.1, 0.4, 0.9) infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        @media (max-width: 768px) {
+            .profile-body {
+                padding: 20px 20px 30px 20px;
+            }
+            .detail-item {
+                padding: 15px 20px;
+            }
+        }
+
+        /* Settings Modal CSS */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.4);
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .settings-modal {
+            background: #fff;
+            width: 90%;
+            max-width: 400px;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            transform: translateY(30px);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .modal-overlay.active .settings-modal {
+            transform: translateY(0);
+        }
+        .settings-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+        }
+        .settings-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--color-text-dark);
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #888;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        .close-modal:hover {
+            color: #ff3333;
+        }
+        .settings-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .setting-btn {
+            background: #f8f9fa;
+            border: 1px solid #eee;
+            padding: 15px 20px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--color-text-dark);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+            width: 100%;
+        }
+        .setting-btn i {
+            font-size: 1.2rem;
+            color: var(--color-primary);
+            width: 24px;
+            text-align: center;
+        }
+        .setting-btn:hover {
+            background: #fff;
+            border-color: var(--color-primary);
+            box-shadow: 0 4px 12px rgba(255, 107, 0, 0.1);
+            transform: translateX(5px);
+        }
+        .setting-btn.logout-btn i {
+            color: #ff4757;
+        }
+        .setting-btn.logout-btn:hover {
+            border-color: #ff4757;
+            box-shadow: 0 4px 12px rgba(255, 71, 87, 0.15);
+        }
+    </style>
+</head>
+<body>
+    <!-- Sticky Navbar -->
+    <header class="navbar-header" id="mainHeader">
+        <div class="nav-container">
+            <a href="index.html" class="logo-link">
+                <div class="logo-wrapper">
+                    <!-- Club Logo -->
+                    <img src="assets/logo.png" alt="বারো মাসে তেরো পার্বণ লোগো" class="logo-img">
+                    <span class="logo-text">বারো মাসে তেরো পার্বণ</span>
+                </div>
+            </a>
+
+            <!-- Nav CTAs -->
+            <div class="nav-cta-wrapper">
+                <a href="#" class="btn btn-outline btn-sm" id="btnSettings" title="সেটিংস (Settings)"><i class="fa-solid fa-gear"></i> সেটিংস</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container" style="padding-top: 100px;">
+        <div class="profile-container">
+            <div class="loader-overlay" id="loader">
+                <div class="spinner"></div>
+                <p style="margin-top: 15px; color: var(--color-text-muted); font-weight: 500;">ডেটা লোড হচ্ছে...</p>
+            </div>
+            
+            <div class="profile-header">
+            </div>
+            
+            <div class="profile-avatar-wrapper">
+                <div class="profile-avatar" id="userInitial">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+            </div>
+            
+            <div class="profile-body">
+                <h1 class="profile-name" id="userName">লোডিং...</h1>
+                <div class="profile-designation" id="userDesignation">লোডিং...</div>
+                
+                <div class="profile-details">
+                    <div class="detail-item">
+                        <div class="detail-icon">
+                            <i class="fa-solid fa-id-card"></i>
+                        </div>
+                        <div class="detail-content">
+                            <div class="detail-label">BMTP ID</div>
+                            <div class="detail-value" id="userId">--</div>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-item">
+                        <div class="detail-icon">
+                            <i class="fa-solid fa-venus-mars"></i>
+                        </div>
+                        <div class="detail-content">
+                            <div class="detail-label">লিঙ্গ (Gender)</div>
+                            <div class="detail-value" id="userGender">--</div>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-item">
+                        <div class="detail-icon">
+                            <i class="fa-solid fa-phone"></i>
+                        </div>
+                        <div class="detail-content">
+                            <div class="detail-label">মোবাইল নম্বর</div>
+                            <div class="detail-value" id="userPhone">--</div>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-item">
+                        <div class="detail-icon">
+                            <i class="fa-solid fa-fingerprint"></i>
+                        </div>
+                        <div class="detail-content" style="display: flex; flex-direction: column; justify-content: center; width: 100%;">
+                            <div class="detail-label">আধার নম্বর</div>
+                            <div class="aadhar-wrapper">
+                                <div class="detail-value" id="userAadhar" data-full="">•••• •••• ••••</div>
+                                <i class="fa-solid fa-eye eye-toggle" id="toggleAadhar"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-item" style="align-items: flex-start;">
+                        <div class="detail-icon">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </div>
+                        <div class="detail-content">
+                            <div class="detail-label">স্থায়ী ঠিকানা (Permanent Address)</div>
+                            <div class="detail-value" id="userAddress" style="line-height: 1.5; margin-top: 5px;">--</div>
+                        </div>
+                    </div>
+            </div>
+            
+            <!-- My Registrations Section -->
+            <div class="profile-registrations" style="margin-top: 30px; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 30px;">
+                <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--color-text-dark); margin-bottom: 20px;"><i class="fa-solid fa-ticket"></i> আমার নিবন্ধন (My Registrations)</h3>
+                
+                <div id="userRegistrationsList" style="display: grid; grid-template-columns: 1fr; gap: 15px;">
+                    <p style="color: var(--color-text-muted); font-size: 0.95rem;">লোড হচ্ছে...</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div class="modal-overlay" id="settingsModal">
+        <div class="settings-modal">
+            <div class="settings-header">
+                <h3 class="settings-title"><i class="fa-solid fa-gear" style="color:var(--color-primary);"></i> সেটিংস</h3>
+                <button class="close-modal" id="closeSettings">&times;</button>
+            </div>
+            <div class="settings-options">
+                <button class="setting-btn" id="btnOpenPasswordModal">
+                    <i class="fa-solid fa-lock"></i> পাসওয়ার্ড পরিবর্তন
+                </button>
+                <button class="setting-btn" id="btnOpenSupportModal">
+                    <i class="fa-solid fa-headset"></i> সাপোর্ট ও সাহায্য
+                </button>
+                <a href="admin.html" class="setting-btn" id="btnAdminDashboard" style="display: none; text-decoration: none; color: #2980b9; font-weight: 600; text-align: left; background: #ebf5fb;">
+                    <i class="fa-solid fa-user-shield"></i> অ্যাডমিন ড্যাশবোর্ড
+                </a>
+                <button class="setting-btn logout-btn" id="modalLogoutBtn">
+                    <i class="fa-solid fa-right-from-bracket"></i> লগ আউট করুন
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Change Password Modal -->
+    <div class="modal-overlay" id="passwordModal">
+        <div class="settings-modal">
+            <div class="settings-header">
+                <h3 class="settings-title"><i class="fa-solid fa-lock" style="color:var(--color-primary);"></i> পাসওয়ার্ড পরিবর্তন</h3>
+                <button class="close-modal" id="closePasswordModal">&times;</button>
+            </div>
+            <div class="password-form">
+                <p style="font-size: 0.85rem; color: #666; margin-bottom: 15px; line-height: 1.4;">নিরাপত্তার স্বার্থে আপনার <strong>আধার নম্বরটি</strong> পুনরায় লিখুন। আধার নম্বর সঠিক হলে তবেই পাসওয়ার্ড পরিবর্তন করা যাবে।</p>
+                
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 5px;">আধার নম্বর <span style="color:red">*</span></label>
+                    <input type="text" id="cpAadhar" autocomplete="off" placeholder="আপনার আধার নম্বর লিখুন" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-family: inherit;" oninput="this.value = this.value.replace(/[^0-9\s]/g, '')">
+                </div>
+                
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 5px;">পুরানো পাসওয়ার্ড <span style="color:red">*</span></label>
+                    <input type="password" id="cpOldPassword" autocomplete="new-password" placeholder="বর্তমান পাসওয়ার্ড লিখুন" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-family: inherit;">
+                    <div style="text-align: right; margin-top: 5px;">
+                        <a href="#" id="cpForgotLink" style="font-size: 0.8rem; color: var(--color-primary); text-decoration: none; font-weight: 600;">পাসওয়ার্ড ভুলে গেছেন?</a>
+                    </div>
+                </div>
+                
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 5px;">নতুন পাসওয়ার্ড <span style="color:red">*</span></label>
+                    <input type="password" id="cpNewPassword" autocomplete="new-password" placeholder="নতুন পাসওয়ার্ড (কমপক্ষে ৬ অক্ষর)" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-family: inherit;">
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 5px;">পাসওয়ার্ড নিশ্চিত করুন <span style="color:red">*</span></label>
+                    <input type="password" id="cpConfirmPassword" autocomplete="new-password" placeholder="পাসওয়ার্ড পুনরায় লিখুন" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-family: inherit;">
+                </div>
+                
+                <p id="cpError" style="color: #ff4757; font-size: 0.85rem; margin-bottom: 15px; display: none; font-weight: 500;"></p>
+                
+                <button id="btnUpdatePassword" style="width: 100%; background: var(--color-primary); color: #fff; border: none; padding: 12px; border-radius: 8px; font-size: 1rem; font-weight: 700; cursor: pointer; transition: 0.3s;">
+                    আপডেট করুন
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Forgot Password Modal (OTP Flow) -->
+    <div class="modal-overlay" id="forgotModal">
+        <div class="settings-modal">
+            <div class="settings-header">
+                <h3 class="settings-title"><i class="fa-solid fa-key" style="color:var(--color-primary);"></i> পাসওয়ার্ড রিসেট</h3>
+                <button class="close-modal" id="closeForgotModal">&times;</button>
+            </div>
+            <div class="password-form" id="forgotStep1">
+                <p style="font-size: 0.85rem; color: #666; margin-bottom: 15px; line-height: 1.4;">আপনার রেজিস্টার্ড মোবাইল নম্বরে একটি <strong>OTP</strong> পাঠানো হবে।</p>
+                <button id="btnSendForgotOtpDash" style="width: 100%; background: var(--color-primary); color: #fff; border: none; padding: 12px; border-radius: 8px; font-size: 1rem; font-weight: 700; cursor: pointer; transition: 0.3s;">
+                    OTP পাঠান
+                </button>
+                <p id="forgotErr1" style="color: #ff4757; font-size: 0.85rem; margin-top: 15px; display: none; font-weight: 500;"></p>
+            </div>
+            
+            <div class="password-form" id="forgotStep2" style="display: none;">
+                <p style="font-size: 0.85rem; color: #10ac84; margin-bottom: 15px; font-weight:600;">OTP পাঠানো হয়েছে!</p>
+                
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 5px;">OTP লিখুন <span style="color:red">*</span></label>
+                    <input type="text" id="dashForgotOtp" placeholder="৬ সংখ্যার OTP" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box;">
+                </div>
+                
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 5px;">নতুন পাসওয়ার্ড <span style="color:red">*</span></label>
+                    <input type="password" id="dashForgotNewPass" autocomplete="new-password" placeholder="নতুন পাসওয়ার্ড (কমপক্ষে ৬ অক্ষর)" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box;">
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 5px;">পাসওয়ার্ড নিশ্চিত করুন <span style="color:red">*</span></label>
+                    <input type="password" id="dashForgotConfPass" autocomplete="new-password" placeholder="পাসওয়ার্ড পুনরায় লিখুন" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box;">
+                </div>
+                
+                <p id="forgotErr2" style="color: #ff4757; font-size: 0.85rem; margin-bottom: 15px; display: none; font-weight: 500;"></p>
+                
+                <button id="btnVerifyAndUpdatePass" style="width: 100%; background: var(--color-primary); color: #fff; border: none; padding: 12px; border-radius: 8px; font-size: 1rem; font-weight: 700; cursor: pointer; transition: 0.3s;">
+                    পাসওয়ার্ড পরিবর্তন করুন
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Support Modal -->
+    <div class="modal-overlay" id="supportModal">
+        <div class="settings-modal">
+            <div class="settings-header">
+                <h3 class="settings-title"><i class="fa-solid fa-headset" style="color:var(--color-primary);"></i> সাপোর্ট ও সাহায্য</h3>
+                <button class="close-modal" id="closeSupportModal">&times;</button>
+            </div>
+            <div class="settings-options">
+                <p style="font-size: 0.9rem; color: #666; margin-bottom: 10px; line-height: 1.5; text-align: center;">যেকোনো সমস্যা বা সাহায্যের জন্য নিচে দেওয়া নাম্বারে আমাদের সাথে সরাসরি হোয়াটসঅ্যাপে যোগাযোগ করুন।</p>
+                
+                <a href="https://wa.me/919547407043" target="_blank" style="text-decoration: none;">
+                    <div class="setting-btn" style="justify-content: center; background: #25D366; color: white; border: none; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);">
+                        <i class="fa-brands fa-whatsapp" style="color: white; font-size: 1.5rem; margin-right: 5px;"></i> 
+                        <span style="font-size: 1.1rem; font-weight: 700;">WhatsApp করুন</span>
+                    </div>
+                </a>
+                <p style="text-align: center; margin-top: 10px; font-weight: 600; color: var(--color-text-dark);">+91 95474 07043</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script loading -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-client.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const supabase = window.supabaseClient;
+
+            // Check for active session
+            const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+
+            if (sessionError || !session) {
+                // Not authenticated, redirect to login
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // Extract metadata
+            const phone = session.user.phone || '';
+            const metadata = session.user.user_metadata || {};
+            const customId = metadata.custom_id || '';
+            const fullName = metadata.full_name || '';
+            const genderMetadata = metadata.gender || '';
+
+            const user = session.user;
+
+            // Check if user is admin
+            try {
+                const { data: profile } = await supabase
+                    .from('profiles')
+                    .select('is_admin')
+                    .eq('id', user.id)
+                    .single();
+                if (profile && profile.is_admin) {
+                    const btnAdmin = document.getElementById('btnAdminDashboard');
+                    if (btnAdmin) btnAdmin.style.display = 'flex';
+                }
+            } catch(e) {
+                console.error("Error checking admin status:", e);
+            }
+
+            // Handle Settings Modal
+            const btnSettings = document.getElementById('btnSettings');
+            const settingsModal = document.getElementById('settingsModal');
+            const closeSettings = document.getElementById('closeSettings');
+            const modalLogoutBtn = document.getElementById('modalLogoutBtn');
+
+            // Handle Password Modal
+            const btnOpenPasswordModal = document.getElementById('btnOpenPasswordModal');
+            const passwordModal = document.getElementById('passwordModal');
+            const closePasswordModal = document.getElementById('closePasswordModal');
+
+            // Handle Support Modal
+            const btnOpenSupportModal = document.getElementById('btnOpenSupportModal');
+            const supportModal = document.getElementById('supportModal');
+            const closeSupportModal = document.getElementById('closeSupportModal');
+
+            // Check URL parameters for auto-opening settings
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('open') === 'settings' && settingsModal) {
+                settingsModal.classList.add('active');
+                // Clean the URL so it doesn't reopen on reload
+                window.history.replaceState({}, document.title, window.location.pathname);
+            }
+
+            if (btnSettings && settingsModal) {
+                btnSettings.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    settingsModal.classList.add('active');
+                });
+            }
+
+            if (closeSettings) {
+                closeSettings.addEventListener('click', () => {
+                    settingsModal.classList.remove('active');
+                });
+            }
+
+            // Open Password Modal & Close Settings Modal
+            if (btnOpenPasswordModal && passwordModal) {
+                btnOpenPasswordModal.addEventListener('click', () => {
+                    settingsModal.classList.remove('active');
+                    passwordModal.classList.add('active');
+                    // Reset fields
+                    document.getElementById('cpAadhar').value = '';
+                    document.getElementById('cpOldPassword').value = '';
+                    document.getElementById('cpNewPassword').value = '';
+                    document.getElementById('cpConfirmPassword').value = '';
+                    document.getElementById('cpError').style.display = 'none';
+                });
+            }
+
+            if (closePasswordModal) {
+                closePasswordModal.addEventListener('click', () => {
+                    passwordModal.classList.remove('active');
+                });
+            }
+
+            // Handle Forgot Password link
+            const cpForgotLink = document.getElementById('cpForgotLink');
+            const forgotModal = document.getElementById('forgotModal');
+            const closeForgotModal = document.getElementById('closeForgotModal');
+
+            if (cpForgotLink && forgotModal) {
+                cpForgotLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    passwordModal.classList.remove('active');
+                    forgotModal.classList.add('active');
+                    
+                    // Reset forgot modal state
+                    document.getElementById('forgotStep1').style.display = 'block';
+                    document.getElementById('forgotStep2').style.display = 'none';
+                    document.getElementById('forgotErr1').style.display = 'none';
+                    document.getElementById('forgotErr2').style.display = 'none';
+                    document.getElementById('dashForgotOtp').value = '';
+                    document.getElementById('dashForgotNewPass').value = '';
+                    document.getElementById('dashForgotConfPass').value = '';
+                });
+            }
+
+            if (closeForgotModal) {
+                closeForgotModal.addEventListener('click', () => {
+                    forgotModal.classList.remove('active');
+                });
+            }
+
+            // Open Support Modal & Close Settings Modal
+            if (btnOpenSupportModal && supportModal) {
+                btnOpenSupportModal.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    settingsModal.classList.remove('active');
+                    supportModal.classList.add('active');
+                });
+            }
+
+            if (closeSupportModal) {
+                closeSupportModal.addEventListener('click', () => {
+                    supportModal.classList.remove('active');
+                });
+            }
+
+            // Close modals when clicking outside
+            [settingsModal, passwordModal, forgotModal, supportModal].forEach(modal => {
+                if (modal) {
+                    modal.addEventListener('click', (e) => {
+                        if (e.target === modal) {
+                            modal.classList.remove('active');
+                        }
+                    });
+                }
+            });
+
+            // Handle Logout from Modal
+            if (modalLogoutBtn) {
+                modalLogoutBtn.addEventListener('click', async () => {
+                    modalLogoutBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> লগ আউট হচ্ছে...';
+                    try {
+                        await supabase.auth.signOut();
+                    } catch (err) {
+                        console.error('Logout error:', err);
+                    }
+                    window.location.href = 'login.html';
+                });
+            }
+
+            // Handle Forgot Password OTP Flow
+            const btnSendForgotOtpDash = document.getElementById('btnSendForgotOtpDash');
+            const btnVerifyAndUpdatePass = document.getElementById('btnVerifyAndUpdatePass');
+
+            if (btnSendForgotOtpDash) {
+                btnSendForgotOtpDash.addEventListener('click', async () => {
+                    const errEl = document.getElementById('forgotErr1');
+                    errEl.style.display = 'none';
+                    btnSendForgotOtpDash.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> পাঠানো হচ্ছে...';
+                    btnSendForgotOtpDash.disabled = true;
+
+                    const { error } = await supabase.auth.signInWithOtp({
+                        phone: phone
+                    });
+
+                    btnSendForgotOtpDash.innerHTML = 'OTP পাঠান';
+                    btnSendForgotOtpDash.disabled = false;
+
+                    if (error) {
+                        errEl.innerText = 'OTP পাঠাতে সমস্যা হয়েছে। একটু পরে চেষ্টা করুন।';
+                        errEl.style.display = 'block';
+                    } else {
+                        document.getElementById('forgotStep1').style.display = 'none';
+                        document.getElementById('forgotStep2').style.display = 'block';
+                    }
+                });
+            }
+
+            if (btnVerifyAndUpdatePass) {
+                btnVerifyAndUpdatePass.addEventListener('click', async () => {
+                    const otp = document.getElementById('dashForgotOtp').value;
+                    const newPass = document.getElementById('dashForgotNewPass').value;
+                    const confPass = document.getElementById('dashForgotConfPass').value;
+                    const errEl = document.getElementById('forgotErr2');
+
+                    errEl.style.display = 'none';
+
+                    if (!otp || !newPass || !confPass) {
+                        errEl.innerText = 'সবগুলি ঘর পূরণ করুন।';
+                        errEl.style.display = 'block';
+                        return;
+                    }
+                    if (newPass.length < 6) {
+                        errEl.innerText = 'পাসওয়ার্ড কমপক্ষে ৬ অক্ষরের হতে হবে।';
+                        errEl.style.display = 'block';
+                        return;
+                    }
+                    if (newPass !== confPass) {
+                        errEl.innerText = 'পাসওয়ার্ড দুটি মিলছে না!';
+                        errEl.style.display = 'block';
+                        return;
+                    }
+
+                    btnVerifyAndUpdatePass.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> যাচাই হচ্ছে...';
+                    btnVerifyAndUpdatePass.disabled = true;
+
+                    // Verify OTP
+                    const { data: otpData, error: otpError } = await supabase.auth.verifyOtp({
+                        phone: phone,
+                        token: otp,
+                        type: 'sms'
+                    });
+
+                    if (otpError) {
+                        errEl.innerText = 'ভুল OTP দেওয়া হয়েছে!';
+                        errEl.style.display = 'block';
+                        btnVerifyAndUpdatePass.innerHTML = 'পাসওয়ার্ড পরিবর্তন করুন';
+                        btnVerifyAndUpdatePass.disabled = false;
+                        return;
+                    }
+
+                    // Update Password
+                    const { error: updateError } = await supabase.auth.updateUser({
+                        password: newPass
+                    });
+
+                    btnVerifyAndUpdatePass.innerHTML = 'পাসওয়ার্ড পরিবর্তন করুন';
+                    btnVerifyAndUpdatePass.disabled = false;
+
+                    if (updateError) {
+                        errEl.innerText = 'পাসওয়ার্ড পরিবর্তন করতে সমস্যা হয়েছে।';
+                        errEl.style.display = 'block';
+                    } else {
+                        alert('আপনার পাসওয়ার্ড সফলভাবে পরিবর্তন করা হয়েছে!');
+                        forgotModal.classList.remove('active');
+                    }
+                });
+            }
+
+            // Handle Password Update Logic
+            const btnUpdatePassword = document.getElementById('btnUpdatePassword');
+            if (btnUpdatePassword) {
+                btnUpdatePassword.addEventListener('click', async () => {
+                    const inputAadhar = document.getElementById('cpAadhar').value.replace(/\D/g, '');
+                    const oldPassword = document.getElementById('cpOldPassword').value;
+                    const newPassword = document.getElementById('cpNewPassword').value;
+                    const confirmPassword = document.getElementById('cpConfirmPassword').value;
+                    const errorEl = document.getElementById('cpError');
+                    
+                    const actualAadhar = (document.getElementById('userAadhar').getAttribute('data-full') || '').replace(/\D/g, '');
+
+                    errorEl.style.display = 'none';
+
+                    if (!inputAadhar || !oldPassword || !newPassword || !confirmPassword) {
+                        errorEl.innerText = 'দয়া করে সবগুলি তথ্য পূরণ করুন।';
+                        errorEl.style.display = 'block';
+                        return;
+                    }
+
+                    if (actualAadhar && inputAadhar !== actualAadhar) {
+                        errorEl.innerText = 'আপনার দেওয়া আধার নম্বরটি মিলছে না!';
+                        errorEl.style.display = 'block';
+                        return;
+                    }
+
+                    if (newPassword.length < 6) {
+                        errorEl.innerText = 'নতুন পাসওয়ার্ড কমপক্ষে ৬ অক্ষরের হতে হবে।';
+                        errorEl.style.display = 'block';
+                        return;
+                    }
+
+                    if (newPassword !== confirmPassword) {
+                        errorEl.innerText = 'নতুন পাসওয়ার্ড দুটি মিলছে না!';
+                        errorEl.style.display = 'block';
+                        return;
+                    }
+
+                    btnUpdatePassword.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> আপডেট হচ্ছে...';
+                    btnUpdatePassword.disabled = true;
+
+                    // Verify old password
+                    const { error: signInError } = await supabase.auth.signInWithPassword({
+                        phone: phone,
+                        password: oldPassword
+                    });
+
+                    if (signInError) {
+                        errorEl.innerText = 'পুরানো পাসওয়ার্ডটি সঠিক নয়!';
+                        errorEl.style.display = 'block';
+                        btnUpdatePassword.innerHTML = 'আপডেট করুন';
+                        btnUpdatePassword.disabled = false;
+                        return;
+                    }
+
+                    // Update to new password
+                    const { data, error } = await supabase.auth.updateUser({
+                        password: newPassword
+                    });
+
+                    btnUpdatePassword.innerHTML = 'আপডেট করুন';
+                    btnUpdatePassword.disabled = false;
+
+                    if (error) {
+                        errorEl.innerText = 'পাসওয়ার্ড পরিবর্তন করতে সমস্যা হচ্ছে: ' + error.message;
+                        errorEl.style.display = 'block';
+                    } else {
+                        alert('আপনার পাসওয়ার্ড সফলভাবে পরিবর্তন করা হয়েছে!');
+                        passwordModal.classList.remove('active');
+                    }
+                });
+            }
+
+            // Fetch json data
+            try {
+                const response = await fetch('memberlist/list data/member_data.json');
+                const memberData = await response.json();
+                
+                let matchedMember = null;
+                
+                // Try to find by customId (BMTP ID) first
+                if (customId) {
+                    matchedMember = memberData.find(m => String(m['BMTP ID']).trim() === customId);
+                }
+                
+                // Fallback to phone if customId not found or missing
+                if (!matchedMember && phone) {
+                    const phoneDigit = phone.replace(/\D/g, '').slice(-10);
+                    matchedMember = memberData.find(m => String(m['MOBILE NO.'] || '').replace(/\D/g, '').slice(-10) === phoneDigit);
+                }
+
+                if (matchedMember) {
+                    // Populate data
+                    const name = matchedMember['NAME'] || fullName || 'সদস্য';
+                    document.getElementById('userName').innerText = name;
+                    
+                    // Set initial DP based on Name
+                    if (name) {
+                        document.getElementById('userInitial').innerText = name.charAt(0).toUpperCase();
+                    }
+                    
+                    document.getElementById('userDesignation').innerText = matchedMember['DESIGNATION'] || 'সদস্য';
+                    document.getElementById('userId').innerText = matchedMember['BMTP ID'] || customId || '--';
+                    
+                    let displayGender = matchedMember['GENDER'] || genderMetadata || '--';
+                    if (displayGender === 'Male') displayGender = 'পুরুষ (Male)';
+                    else if (displayGender === 'Female') displayGender = 'মহিলা (Female)';
+                    else if (displayGender === 'Other') displayGender = 'অন্যান্য (Other)';
+                    document.getElementById('userGender').innerText = displayGender;
+
+                    document.getElementById('userPhone').innerText = matchedMember['MOBILE NO.'] || phone || '--';
+                    document.getElementById('userAddress').innerText = matchedMember['PARMANENT ADDRESS'] || '--';
+                    
+                    // Handle Aadhar
+                    const fullAadhar = matchedMember['AADHAAR NO'] || '';
+                    const aadharEl = document.getElementById('userAadhar');
+                    if (fullAadhar) {
+                        // Store full Aadhar
+                        aadharEl.setAttribute('data-full', fullAadhar);
+                        
+                        // Show masked initially
+                        const masked = fullAadhar.replace(/\D/g, '').replace(/.(?=.{4})/g, '•').replace(/(.{4})/g, '$1 ').trim();
+                        aadharEl.innerText = masked || '•••• •••• ••••';
+                    } else {
+                        aadharEl.innerText = 'তথ্য নেই';
+                        document.getElementById('toggleAadhar').style.display = 'none';
+                    }
+                } else {
+                    // Fallback to metadata if member not found in JSON
+                    document.getElementById('userName').innerText = fullName || 'সদস্য';
+                    if (fullName) {
+                        document.getElementById('userInitial').innerText = fullName.charAt(0).toUpperCase();
+                    }
+                    document.getElementById('userId').innerText = customId || '--';
+                    
+                    let displayGender = genderMetadata || '--';
+                    if (displayGender === 'Male') displayGender = 'পুরুষ (Male)';
+                    else if (displayGender === 'Female') displayGender = 'মহিলা (Female)';
+                    else if (displayGender === 'Other') displayGender = 'অন্যান্য (Other)';
+                    document.getElementById('userGender').innerText = displayGender;
+                    
+                    document.getElementById('userPhone').innerText = phone || '--';
+                    document.getElementById('userDesignation').innerText = 'অজানা পদবি';
+                    document.getElementById('userAadhar').innerText = 'তথ্য নেই';
+                    document.getElementById('toggleAadhar').style.display = 'none';
+                }
+                
+            } catch (err) {
+                console.error("Error fetching data:", err);
+                document.getElementById('userName').innerText = fullName || 'সদস্য';
+                document.getElementById('userId').innerText = customId || '--';
+            } finally {
+                // Hide loader
+                document.getElementById('loader').style.display = 'none';
+            }
+
+            // Fetch User Registrations from Supabase
+            try {
+                const { data: regData, error: regError } = await supabase
+                    .from('registrations')
+                    .select('*')
+                    .eq('user_id', user.id)
+                    .order('created_at', { ascending: false });
+                
+                const listContainer = document.getElementById('userRegistrationsList');
+                if (regError) {
+                    console.error("Error fetching registrations:", regError);
+                    listContainer.innerHTML = '<p style="color: #ff4757; font-size: 0.95rem;">নিবন্ধন লোড করতে সমস্যা হয়েছে।</p>';
+                } else if (!regData || regData.length === 0) {
+                    listContainer.innerHTML = '<p style="color: var(--color-text-muted); font-size: 0.95rem;">আপনার কোনো সক্রিয় নিবন্ধন নেই।</p>';
+                } else {
+                    listContainer.innerHTML = '';
+                    regData.forEach(reg => {
+                        let statusColor = '#f39c12'; // Pending
+                        let statusIcon = 'fa-clock';
+                        if (reg.registration_status === 'Confirmed') {
+                            statusColor = '#27ae60';
+                            statusIcon = 'fa-check-circle';
+                        } else if (reg.registration_status === 'Rejected') {
+                            statusColor = '#e74c3c';
+                            statusIcon = 'fa-times-circle';
+                        } else if (reg.registration_status === 'Pending Verification') {
+                            statusColor = '#3498db';
+                            statusIcon = 'fa-spinner';
+                        }
+
+                        let actionHtml = '';
+                        if (reg.payment_status === 'Pending') {
+                            actionHtml = `<a href="payment.html?reg_id=${reg.registration_id}" class="btn btn-sm btn-primary" style="padding: 5px 10px; font-size: 0.8rem; border-radius: 4px;"><i class="fa-solid fa-credit-card"></i> Pay Now</a>`;
+                        }
+
+                        const cardHTML = `
+                            <div style="background: #fff; padding: 15px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.05); box-shadow: 0 2px 8px rgba(0,0,0,0.02); display: flex; flex-direction: column; gap: 8px;">
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <h4 style="font-size: 1rem; color: var(--color-text-dark); margin: 0;">${reg.event_title} - ${reg.category_name}</h4>
+                                    <span style="font-size: 0.8rem; background: ${statusColor}20; color: ${statusColor}; padding: 3px 8px; border-radius: 12px; font-weight: 600;"><i class="fa-solid ${statusIcon}"></i> ${reg.registration_status}</span>
+                                </div>
+                                <div style="font-size: 0.85rem; color: #555;">
+                                    <strong>অংশগ্রহণকারী:</strong> ${reg.participant_name} <br>
+                                    <strong>রেজিস্ট্রেশন আইডি:</strong> ${reg.registration_id} <br>
+                                    <strong>তারিখ:</strong> ${new Date(reg.created_at).toLocaleDateString('bn-BD')}
+                                </div>
+                                <div style="margin-top: 5px; text-align: right;">
+                                    ${actionHtml}
+                                </div>
+                            </div>
+                        `;
+                        listContainer.innerHTML += cardHTML;
+                    });
+                }
+            } catch (e) {
+                console.error(e);
+            }
+
+            // Eye Toggle Logic
+            const toggleIcon = document.getElementById('toggleAadhar');
+            const aadharEl = document.getElementById('userAadhar');
+            let isHidden = true;
+
+            if (toggleIcon) {
+                toggleIcon.addEventListener('click', () => {
+                    const fullAadhar = aadharEl.getAttribute('data-full');
+                    if (!fullAadhar) return;
+                    
+                    if (isHidden) {
+                        // Show full
+                        aadharEl.innerText = fullAadhar;
+                        toggleIcon.classList.remove('fa-eye');
+                        toggleIcon.classList.add('fa-eye-slash');
+                        isHidden = false;
+                    } else {
+                        // Show masked
+                        const masked = fullAadhar.replace(/\D/g, '').replace(/.(?=.{4})/g, '•').replace(/(.{4})/g, '$1 ').trim();
+                        aadharEl.innerText = masked;
+                        toggleIcon.classList.remove('fa-eye-slash');
+                        toggleIcon.classList.add('fa-eye');
+                        isHidden = true;
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

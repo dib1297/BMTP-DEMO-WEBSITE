@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facilitation Ceremony MLA Sri Ajoy Roy | Gallery | BMTP</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Tiro+Bangla&display=swap" rel="stylesheet">
+    <style>
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+        :root{--pri:#D4A017;--bg:#FAF8F2;--text:#3d3d3d;--r:12px;--sh:0 4px 20px rgba(0,0,0,0.1);--tr:0.3s ease}
+        body{font-family:"Hind Siliguri",sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+        .page-header{position:relative;background:linear-gradient(135deg,#4a1a1a,#5a2727,#3a1a1a);padding:60px 20px 80px;text-align:center}
+        .back-btn{position:absolute;top:20px;left:20px;display:inline-flex;align-items:center;gap:8px;color:rgba(255,255,255,0.8);text-decoration:none;font-size:.95rem;padding:8px 16px;border:1px solid rgba(255,255,255,0.2);border-radius:50px;transition:all .3s;z-index:10}
+        .back-btn:hover{color:#fff;border-color:rgba(255,255,255,0.5)}
+        .header-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(212,160,23,0.2);border:1px solid rgba(212,160,23,0.4);color:var(--pri);padding:6px 16px;border-radius:50px;font-size:.85rem;font-weight:600;margin-bottom:16px}
+        .page-header h1{font-family:"Tiro Bangla",serif;font-size:clamp(1.6rem,4vw,2.8rem);color:#fff;line-height:1.3;margin-bottom:12px}
+        .page-header p{color:rgba(255,255,255,0.7);font-size:1rem;max-width:600px;margin:0 auto}
+        .leaf{font-size:3rem;margin-bottom:16px;display:block;color:var(--pri)}
+        .wave{display:block;width:100%;height:60px;margin-top:-2px}
+        .gallery-container{max-width:1200px;margin:0 auto;padding:40px 20px 60px}
+        .gallery-meta{margin-bottom:24px}
+        .photo-count{color:#666;font-size:.9rem}.photo-count span{color:var(--pri);font-weight:700}
+        .gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+        .photo-item{border-radius:12px;overflow:hidden;cursor:pointer;position:relative;box-shadow:0 4px 20px rgba(0,0,0,0.1);transition:transform .3s,box-shadow .3s;aspect-ratio:4/3;background:#e0e0e0}
+        .photo-item:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,0.2)}
+        .photo-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
+        .photo-item:hover img{transform:scale(1.05)}
+        .photo-hover{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.6) 0%,transparent 60%);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:16px}
+        .photo-item:hover .photo-hover{opacity:1}
+        .photo-hover i{color:#fff;font-size:1.5rem;margin-left:auto}
+        .photo-hover i{color:#fff;font-size:1.5rem;margin-left:auto}
+        .lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.95);z-index:9999;align-items:center;justify-content:center}
+        .lightbox.active{display:flex}
+        .lightbox-inner{max-width:92vw;max-height:90vh;display:flex;flex-direction:column;align-items:center}
+        .lightbox-img{max-width:100%;max-height:78vh;border-radius:8px;object-fit:contain;box-shadow:0 10px 60px rgba(0,0,0,.8)}
+        .lightbox-caption-bar{margin-top:16px;text-align:center;color:rgba(255,255,255,.85);font-size:.95rem}
+        .lightbox-close{position:fixed;top:20px;right:24px;color:#fff;font-size:2.5rem;cursor:pointer;z-index:10001;line-height:1}
+        .lightbox-close:hover{color:#D4A017}
+        .lightbox-nav{position:fixed;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:#fff;width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.3rem;z-index:10001}
+        .lightbox-nav:hover{background:#D4A017;border-color:#D4A017}
+        .lightbox-prev{left:16px}.lightbox-next{right:16px}
+        .lightbox-counter{position:fixed;top:24px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.7);font-size:.9rem;z-index:10001}
+    </style>
+</head>
+<body>
+    <div class="page-header">
+        <a href="index.html#gallery" class="back-btn"><i class="fa-solid fa-arrow-left"></i> গ্যালারিতে ফিরুন</a>
+        <span class="leaf"><i class="fa-solid fa-award"></i></span>
+        <div class="header-badge"><i class="fa-solid fa-calendar-days"></i> সম্মাননা জ্ঞাপন</div>
+        <h1>নবনির্বাচিত বিধায়ক শ্রী অজয় রায় মহাশয়ের সংবর্ধনা</h1>
+        <p>আমাদের সংগঠনের পক্ষ থেকে নবনির্বাচিত বিধায়ক মহাশয়কে সম্মাননা ও সংবর্ধনা প্রদান</p>
+    </div>
+    <svg class="wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 60" preserveAspectRatio="none">
+        <path fill="#FAF8F2" d="M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60 Z"/>
+    </svg>
+    <div class="gallery-container">
+        <div class="gallery-meta">
+            <div class="photo-count">মোট <span>7টি</span> ছবি</div>
+        </div>
+        <div class="gallery-grid" id="galleryGrid"></div>
+    </div>
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close" id="lbClose">&times;</span>
+        <div class="lightbox-counter" id="lbCounter"></div>
+        <div class="lightbox-nav lightbox-prev" id="lbPrev"><i class="fa-solid fa-chevron-left"></i></div>
+        <div class="lightbox-nav lightbox-next" id="lbNext"><i class="fa-solid fa-chevron-right"></i></div>
+        <div class="lightbox-inner">
+            <img class="lightbox-img" id="lbImg" src="" alt="">
+            <div class="lightbox-caption-bar" id="lbCaption"></div>
+        </div>
+    </div>
+    <script>
+        const images=[
+            {src:"gallary images/Facilation Ceremony Of Our Newly Elected MLA Sri Ajoy Roy/F3FB9386-7615-4742-89C3-29C8832D4E01.png",caption:"সংবর্ধনা প্রদান"},
+            {src:"gallary images/Facilation Ceremony Of Our Newly Elected MLA Sri Ajoy Roy/IMG_1655.jpg",caption:"সম্মাননা জ্ঞাপন"},
+            {src:"gallary images/Facilation Ceremony Of Our Newly Elected MLA Sri Ajoy Roy/2FA09C54-8301-4E5D-A9D2-65240DDB12C5.png",caption:"সদস্যদের সাথে"},
+            {src:"gallary images/Facilation Ceremony Of Our Newly Elected MLA Sri Ajoy Roy/38A5FA46-9BEF-4875-B962-5AC41BA41C8E.png",caption:"সম্মাননা জ্ঞাপন"},
+            {src:"gallary images/Facilation Ceremony Of Our Newly Elected MLA Sri Ajoy Roy/7392EBC8-59DD-4421-AF25-1F140D808E8F.jpg",caption:"গ্রুপ ছবি"},
+            {src:"gallary images/Facilation Ceremony Of Our Newly Elected MLA Sri Ajoy Roy/CF450EC5-3ABF-4DD8-8AD8-223513CA30D9.png",caption:"সংবর্ধনা অনুষ্ঠান"},
+            {src:"gallary images/Facilation Ceremony Of Our Newly Elected MLA Sri Ajoy Roy/IMG_2087.PNG",caption:"সংবর্ধনা"}
+        ];
+        let cur=0;
+        const grid=document.getElementById("galleryGrid");
+        images.forEach((img,i)=>{
+            const item=document.createElement("div");
+            item.className="photo-item";
+            const im=document.createElement("img");
+            im.src=img.src;im.alt=img.caption;im.loading=i===0?"eager":"lazy";
+            const hov=document.createElement("div");
+            hov.className="photo-hover";
+            hov.innerHTML="<i class=\"fa-solid fa-expand\"></i>";
+            item.appendChild(im);item.appendChild(hov);
+            item.addEventListener("click",()=>openLB(i));
+            grid.appendChild(item);
+        });
+        const lb=document.getElementById("lightbox");
+        const lbImg=document.getElementById("lbImg");
+        const lbCap=document.getElementById("lbCaption");
+        const lbCnt=document.getElementById("lbCounter");
+        function upd(){lbImg.src=images[cur].src;lbCap.innerText=images[cur].caption;lbCnt.innerText=(cur+1)+" / "+images.length;}
+        function openLB(i){cur=i;upd();lb.classList.add("active");document.body.style.overflow="hidden";}
+        function closeLB(){lb.classList.remove("active");document.body.style.overflow="";lbImg.src="";}
+        document.getElementById("lbClose").addEventListener("click",closeLB);
+        document.getElementById("lbPrev").addEventListener("click",()=>{cur=cur>0?cur-1:images.length-1;upd();});
+        document.getElementById("lbNext").addEventListener("click",()=>{cur=cur<images.length-1?cur+1:0;upd();});
+        lb.addEventListener("click",e=>{if(e.target===lb)closeLB();});
+        document.addEventListener("keydown",e=>{
+            if(!lb.classList.contains("active"))return;
+            if(e.key==="Escape")closeLB();
+            if(e.key==="ArrowLeft"){cur=cur>0?cur-1:images.length-1;upd();}
+            if(e.key==="ArrowRight"){cur=cur<images.length-1?cur+1:0;upd();}
+        });
+    </script>
+</body>
+</html>

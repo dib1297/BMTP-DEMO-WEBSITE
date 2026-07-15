@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>বারো মাসে তেরো পার্বণ | লগ ইন ও নিবন্ধন</title>
+    <meta name="description" content="বারো মাসে তেরো পার্বণ - লগ ইন ও নিবন্ধন পেজ। আপনার অ্যাকাউন্ট অ্যাক্সেস করুন বা নতুন মেম্বারশিপ অ্যাকাউন্ট তৈরি করুন।">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://baromaseteroparbon.org/login.html">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Sans+Bengali:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css?v=1.1.5">
+    <link rel="stylesheet" href="join.css?v=1.0.0">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/logo.png">
+    
+    <style>
+        .login-sub-toggles .btn {
+            border-radius: var(--radius-sm);
+            font-size: 0.9rem;
+            padding: 10px;
+        }
+        .login-sub-toggles .btn.active {
+            background-color: var(--color-secondary);
+            color: #FFFFFF;
+            border-color: var(--color-secondary);
+        }
+        .social-auth-separator {
+            text-align: center;
+            margin: 20px 0;
+            color: var(--color-text-muted);
+            position: relative;
+        }
+        .social-auth-separator::before, .social-auth-separator::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 40%;
+            height: 1px;
+            background-color: var(--color-border);
+        }
+        .social-auth-separator::before { left: 0; }
+        .social-auth-separator::after { right: 0; }
+        
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            right: -400px;
+            background-color: #FFFFFF;
+            border-left: 5px solid var(--color-accent-green);
+            box-shadow: var(--shadow-lg);
+            border-radius: var(--radius-md);
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            z-index: 9999;
+            width: calc(100% - 32px);
+            max-width: 380px;
+            transition: right var(--transition-normal) cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .toast.show {
+            right: 24px;
+        }
+        .toast.error-toast {
+            border-left-color: var(--color-accent-red);
+        }
+        .toast-content {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .toast-icon {
+            font-size: 1.5rem;
+            color: var(--color-accent-green);
+        }
+        .toast.error-toast .toast-icon {
+            color: var(--color-accent-red);
+        }
+        .toast-message {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+        .toast-title {
+            font-weight: 700;
+            color: var(--color-text-dark);
+            font-size: 0.95rem;
+        }
+        .toast-desc {
+            color: var(--color-text-muted);
+            font-size: 0.85rem;
+            margin-top: 2px;
+        }
+        .toast-close {
+            background: none;
+            border: none;
+            color: var(--color-text-muted);
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sticky Navbar -->
+    <header class="navbar-header scrolled" id="mainHeader">
+        <div class="ticker-bar">
+            <div class="ticker-content">
+                <span class="ticker-badge"><i class="fa-solid fa-bullhorn"></i> আসন্ন অনুষ্ঠান:</span>
+                <div class="ticker-track">
+                    <span class="ticker-text">🎉 শারদীয় দুর্গাপূজা ১৪৩৩ (১৫ - ১৯ অক্টোবর, ২০২৬)! আমাদের ক্লাবের মূল আকর্ষণ রাজকীয় আলোকসজ্জা ও সুবর্ণ জয়ন্তী তোরণ। সকলে আমন্ত্রিত!</span>
+                </div>
+            </div>
+        </div>
+        <div class="nav-container">
+            <a href="index.html#home" class="logo-link">
+                <div class="logo-wrapper">
+                    <img src="assets/logo.png" alt="বারো মাসে তেরো পার্বণ লোগো" class="logo-img">
+                    <span class="logo-text">বারো মাসে তেরো পার্বণ</span>
+                </div>
+            </a>
+
+            <!-- Desktop Menu -->
+            <nav class="desktop-nav" aria-label="প্রধান নেভিগেশন">
+                <ul class="nav-list">
+                    <li><a href="index.html#home" class="nav-link">Home</a></li>
+                    <li><a href="index.html#about" class="nav-link">About Us</a></li>
+                    <li><a href="index.html#what-we-do" class="nav-link">What We Do</a></li>
+                    <li><a href="index.html#events" class="nav-link">Our Events</a></li>
+
+                    <li><a href="index.html#gallery" class="nav-link">Gallery</a></li>
+                    <li><a href="index.html#committee" class="nav-link">Committee</a></li>
+                    <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+
+            <!-- Nav CTAs (Desktop) -->
+            <div class="nav-cta-wrapper">
+                <a href="join.html" class="btn btn-primary btn-sm">Become a Member</a>
+                <a href="donate.html" class="btn btn-navy btn-sm">Donate</a>
+                <a href="login.html" class="btn btn-outline btn-sm">Sign In</a>
+            </div>
+
+            <!-- Hamburger Button -->
+            <button class="hamburger-btn" id="menuToggle" aria-label="মেনু খুলুন" aria-expanded="false">
+                <span class="hamburger-bar"></span>
+                <span class="hamburger-bar"></span>
+                <span class="hamburger-bar"></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Drawer Navigation -->
+    <div class="mobile-drawer" id="mobileDrawer">
+        <div class="drawer-header">
+            <span class="logo-text">Menu</span>
+            <button class="close-drawer-btn" id="closeDrawer" aria-label="মেনু বন্ধ করুন">&times;</button>
+        </div>
+        <ul class="drawer-list">
+            <li><a href="index.html#home" class="drawer-link">Home</a></li>
+            <li><a href="index.html#about" class="drawer-link">About Us</a></li>
+            <li><a href="index.html#what-we-do" class="drawer-link">What We Do</a></li>
+            <li><a href="index.html#events" class="drawer-link">Our Events</a></li>
+
+            <li><a href="index.html#gallery" class="drawer-link">Gallery</a></li>
+            <li><a href="index.html#committee" class="drawer-link">Committee</a></li>
+            <li><a href="index.html#contact" class="drawer-link">Contact</a></li>
+            <li><a href="join.html" class="drawer-link btn-drawer-cta">Become a Member</a></li>
+            <li><a href="donate.html" class="drawer-link btn-drawer-cta btn-drawer-cta-navy">Donate</a></li>
+            <li><a href="login.html" class="drawer-link btn-drawer-cta btn-drawer-cta-outline">Sign In</a></li>
+        </ul>
+    </div>
+    <div class="drawer-overlay" id="drawerOverlay"></div>
+
+    <!-- Page Header -->
+    <section class="page-header" style="background: radial-gradient(circle at 50% 50%, rgba(255, 179, 0, 0.05) 0%, rgba(211, 47, 47, 0.02) 100%); padding-top: 150px; padding-bottom: 30px;">
+        <div class="container">
+            <h1 class="section-title" style="font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 800; color: var(--color-text-dark); font-family: var(--font-headings);">Welcome to Official Login Portal for Organization Members</h1>
+            <div class="section-underline" style="margin: 10px auto 0 auto;"></div>
+            <p style="text-align: center; margin-top: 15px; color: var(--color-text-muted); font-size: 1.1rem;">This access is only for Official Organization Members</p>
+        </div>
+    </section>
+
+    <!-- Main Content Panel -->
+    <section class="join-page-section section-padding bg-light" style="padding-top: 40px;">
+        <div class="container">
+            <div class="auth-container">
+                <!-- Main Header Tabs -->
+                <div class="auth-tabs">
+                    <button class="auth-tab-btn active" id="tabLoginBtn" style="line-height: 1.2;">
+                        লগ ইন (Log In)
+                        <span style="display: block; font-size: 0.7rem; font-weight: 500; margin-top: 4px; opacity: 0.8;">For official access</span>
+                    </button>
+                    <button class="auth-tab-btn" id="tabSignupBtn" style="line-height: 1.2;">
+                        নিবন্ধন (Sign Up)
+                        <span style="display: block; font-size: 0.7rem; font-weight: 500; margin-top: 4px; opacity: 0.8;">Only for first time website registration</span>
+                    </button>
+                </div>
+
+                <div class="auth-form-wrapper">
+                    
+                    <!-- =======================================
+                         PANEL 1: LOG IN FORM 
+                         ======================================= -->
+                    <div id="loginPanel" class="auth-panel active" style="display: block;">
+                        <!-- Sub Tabs (Password vs OTP) -->
+                        <div class="login-sub-toggles" style="display: flex; gap: 10px; margin-bottom: 20px;">
+                            <button type="button" class="btn btn-outline btn-sm active" id="subTabPasswordBtn" style="flex: 1;">মোবাইল ও পাসওয়ার্ড</button>
+                            <button type="button" class="btn btn-outline btn-sm" id="subTabOtpBtn" style="flex: 1;">মোবাইল ও ওটিপি</button>
+                        </div>
+
+                        <!-- Login Method A: Mobile & Password -->
+                        <form id="loginPasswordForm" class="auth-form active" style="display: block;">
+                            <div class="form-input-group">
+                                <label for="loginPhoneInput">মোবাইল নম্বর <span class="req">*</span></label>
+                                <div style="display: flex; align-items: center; border: 1px solid var(--color-border); border-radius: var(--radius-sm); overflow: hidden; background-color: #FFFFFF;">
+                                    <span style="padding: 12px 16px; background-color: var(--color-bg-light); border-right: 1px solid var(--color-border); color: var(--color-text-dark); font-weight: 500; font-family: var(--font-body); font-size: 1rem;">+91</span>
+                                    <input type="tel" id="loginPhoneInput" required placeholder="9876543210" oninput="this.value = this.value.replace(/[^0-9]/g, '')" inputmode="numeric" style="border: none; flex: 1; padding: 12px 16px; outline: none; margin: 0; border-radius: 0; background-color: transparent;">
+                                </div>
+                            </div>
+                            <div class="form-input-group">
+                                <label for="loginPassword">পাসওয়ার্ড <span class="req">*</span></label>
+                                <input type="password" id="loginPassword" required placeholder="পাসওয়ার্ড লিখুন">
+                            </div>
+                            <div style="text-align: right; margin-bottom: 10px;">
+                                <a href="#" id="forgotPasswordLink" style="color: var(--color-primary); font-size: 0.9rem; text-decoration: underline;">পাসওয়ার্ড ভুলে গেছেন? (Forgot Password?)</a>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">লগ ইন করুন</button>
+                        </form>
+
+                        <!-- Login Method B: Mobile & OTP -->
+                        <form id="loginOtpForm" class="auth-form" style="display: none;">
+                            <div class="form-input-group" id="loginOtpPhoneGroup">
+                                <label for="loginOtpPhone">মোবাইল নম্বর <span class="req">*</span></label>
+                                <div style="display: flex; align-items: center; border: 1px solid var(--color-border); border-radius: var(--radius-sm); overflow: hidden; background-color: #FFFFFF;">
+                                    <span style="padding: 12px 16px; background-color: var(--color-bg-light); border-right: 1px solid var(--color-border); color: var(--color-text-dark); font-weight: 500; font-family: var(--font-body); font-size: 1rem;">+91</span>
+                                    <input type="tel" id="loginOtpPhone" placeholder="9876543210" oninput="this.value = this.value.replace(/[^0-9]/g, '')" inputmode="numeric" style="border: none; flex: 1; padding: 12px 16px; outline: none; margin: 0; border-radius: 0; background-color: transparent;">
+                                </div>
+                            </div>
+                            
+                            <div class="form-input-group" id="loginOtpCodeGroup" style="display: none;">
+                                <label for="loginOtpCode">ওটিপি (OTP) <span class="req">*</span></label>
+                                <input type="text" id="loginOtpCode" placeholder="৬ সংখ্যার ওটিপি লিখুন">
+                            </div>
+
+
+                            <button type="button" id="btnSendLoginOTP" class="btn btn-primary btn-lg" style="width: 100%; margin-top: 10px;">ওটিপি পাঠান</button>
+                            <button type="button" id="btnVerifyLoginOTP" class="btn btn-primary btn-lg" style="width: 100%; margin-top: 10px; display: none;">ওটিপি যাচাই করুন</button>
+                        </form>
+
+                        <!-- Forgot Password Form -->
+                        <form id="forgotPasswordForm" class="auth-form" style="display: none;">
+                            <h3 style="margin-bottom: 15px; font-size: 1.2rem;">পাসওয়ার্ড রিসেট করুন</h3>
+                            
+                            <div class="form-input-group" id="forgotPhoneGroup">
+                                <label for="forgotMemId">Membership ID <span class="req">*</span></label>
+                                <input type="text" id="forgotMemId" required placeholder="উদাঃ 2026/1234">
+                                <label for="forgotPhone" style="margin-top: 10px;">মোবাইল নম্বর <span class="req">*</span></label>
+                                <div style="display: flex; align-items: center; border: 1px solid var(--color-border); border-radius: var(--radius-sm); overflow: hidden; background-color: #FFFFFF;">
+                                    <span style="padding: 12px 16px; background-color: var(--color-bg-light); border-right: 1px solid var(--color-border); color: var(--color-text-dark); font-weight: 500; font-family: var(--font-body); font-size: 1rem;">+91</span>
+                                    <input type="tel" id="forgotPhone" required placeholder="9876543210" oninput="this.value = this.value.replace(/[^0-9]/g, '')" inputmode="numeric" style="border: none; flex: 1; padding: 12px 16px; outline: none; margin: 0; border-radius: 0; background-color: transparent;">
+                                </div>
+                            </div>
+                            
+                            <div class="form-input-group" id="forgotOtpGroup" style="display: none;">
+                                <label for="forgotOtpCode">ওটিপি (OTP) <span class="req">*</span></label>
+                                <input type="text" id="forgotOtpCode" placeholder="৬ সংখ্যার ওটিপি লিখুন">
+                            </div>
+                            
+                            <div class="form-input-group" id="forgotNewPasswordGroup" style="display: none;">
+                                <label for="forgotNewPassword">নতুন পাসওয়ার্ড <span class="req">*</span></label>
+                                <input type="password" id="forgotNewPassword" placeholder="নতুন পাসওয়ার্ড লিখুন">
+                            </div>
+
+                            <div id="recaptcha-container-forgot" style="margin-top: 10px; margin-bottom: 10px;"></div>
+
+                            <button type="button" id="btnSendForgotOTP" class="btn btn-primary btn-lg" style="width: 100%; margin-top: 10px;">ওটিপি পাঠান</button>
+                            <button type="button" id="btnVerifyForgotOTP" class="btn btn-primary btn-lg" style="width: 100%; margin-top: 10px; display: none;">ওটিপি যাচাই করুন</button>
+                            <button type="button" id="btnResetPassword" class="btn btn-primary btn-lg" style="width: 100%; margin-top: 10px; display: none;">পাসওয়ার্ড আপডেট করুন</button>
+                            
+                            <div style="text-align: center; margin-top: 15px;">
+                                <a href="#" id="backToLoginLink" style="color: var(--color-primary); font-size: 0.9rem; text-decoration: underline;">লগইন পেজে ফিরে যান (Back to Login)</a>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- =======================================
+                         PANEL 2: SIGN UP / REGISTRATION FORM
+                         ======================================= -->
+                    <div id="signupPanel" class="auth-panel" style="display: none;">
+                        <!-- Registration Form Inputs Step -->
+                        <form id="registrationForm">
+                            <div class="form-input-group">
+                                <label for="regName">নাম <span class="req">*</span></label>
+                                <input type="text" id="regName" required placeholder="আপনার পূর্ণ নাম লিখুন">
+                            </div>
+                            
+                            <div class="form-input-group">
+                                <label for="regGender">লিঙ্গ (Gender) <span class="req">*</span></label>
+                                <select id="regGender" required style="width: 100%; padding: 12px 16px; border: 1px solid var(--color-border); border-radius: var(--radius-sm); font-family: var(--font-body); font-size: 1rem; background-color: #FFFFFF; appearance: auto; -webkit-appearance: auto;">
+                                    <option value="" disabled selected>আপনার লিঙ্গ নির্বাচন করুন</option>
+                                    <option value="Male">পুরুষ (Male)</option>
+                                    <option value="Female">মহিলা (Female)</option>
+                                    <option value="Other">অন্যান্য (Other)</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-input-group">
+                                <label for="regPhone">মোবাইল নম্বর <span class="req">*</span></label>
+                                <div style="display: flex; align-items: center; border: 1px solid var(--color-border); border-radius: var(--radius-sm); overflow: hidden; background-color: #FFFFFF;">
+                                    <span style="padding: 12px 16px; background-color: var(--color-bg-light); border-right: 1px solid var(--color-border); color: var(--color-text-dark); font-weight: 500; font-family: var(--font-body); font-size: 1rem;">+91</span>
+                                    <input type="tel" id="regPhone" required placeholder="9876543210" oninput="this.value = this.value.replace(/[^0-9]/g, '')" inputmode="numeric" style="border: none; flex: 1; padding: 12px 16px; outline: none; margin: 0; border-radius: 0; background-color: transparent;">
+                                </div>
+                                <p id="errorPhone" style="color: red; font-size: 0.85rem; margin-top: 5px; display: none;"></p>
+                            </div>
+
+                            <div class="form-input-group">
+                                <label>আইডি (ID) <span class="req">*</span></label>
+                                <div class="custom-id-wrapper" style="display: flex; gap: 10px; align-items: center;">
+                                    <select id="regIdYear" required style="flex: 1.2; padding: 12px 16px; border: 1px solid var(--color-border); border-radius: var(--radius-sm); font-family: var(--font-body); font-size: 1rem; background-color: #FFFFFF;">
+                                        <option value="" disabled selected>বছর (Year)</option>
+                                        <option value="2026">2026</option>
+                                        <option value="2027">2027</option>
+                                        <option value="2028">2028</option>
+                                        <option value="2029">2029</option>
+                                    </select>
+                                    <span style="font-size: 1.5rem; font-weight: bold; color: var(--color-text-muted);">/</span>
+                                    <input type="text" id="regIdSuffix" required placeholder="আইডি লিখুন (উদাঃ ১২৩)" maxlength="3" oninput="this.value = this.value.replace(/[^0-9]/g, '')" inputmode="numeric" style="flex: 1.5; padding: 12px 16px; border: 1px solid var(--color-border); border-radius: var(--radius-sm); font-family: var(--font-body); font-size: 1rem;">
+                                </div>
+                                <p style="margin-top: 5px; font-size: 0.85rem; color: var(--color-text-muted);">
+                                    <span style="color: red;">*</span> যাদের আইডি ২ সংখ্যার, তারা প্রথমে 0 বসিয়ে আইডি নম্বরটি লিখবেন (উদাঃ 012)
+                                </p>
+                                <p id="errorId" style="color: red; font-size: 0.85rem; margin-top: 5px; display: none;"></p>
+                            </div>
+
+                            <div class="form-input-group">
+                                <label for="regAadhar">আধার নম্বর (Aadhar No) <span class="req">*</span></label>
+                                <input type="text" id="regAadhar" required placeholder="আপনার আধার নম্বর লিখুন (উদাঃ 1234 5678 9012)" maxlength="14" oninput="this.value = this.value.replace(/[^0-9\s]/g, '')" inputmode="numeric">
+                                <p id="errorAadhar" style="color: red; font-size: 0.85rem; margin-top: 5px; display: none;"></p>
+                            </div>
+
+                            <div class="form-input-group">
+                                <label for="regPassword">পাসওয়ার্ড <span class="req">*</span></label>
+                                <input type="password" id="regPassword" required placeholder="পাসওয়ার্ড তৈরি করুন (ন্যূনতম ৬ অক্ষরের)">
+                            </div>
+
+                            <div class="form-input-group">
+                                <label for="regConfirmPassword">পাসওয়ার্ড নিশ্চিত করুন (Confirm Password) <span class="req">*</span></label>
+                                <input type="password" id="regConfirmPassword" required placeholder="পাসওয়ার্ডটি পুনরায় লিখুন">
+                                <p id="errorConfirmPassword" style="color: red; font-size: 0.85rem; margin-top: 5px; display: none;">পাসওয়ার্ড মেলেনি (Password does not match)।</p>
+                            </div>
+
+                            <div id="recaptcha-container-reg" style="margin-top: 10px; margin-bottom: 10px;"></div>
+
+                            <button type="button" id="btnRegisterSubmit" class="btn btn-primary btn-lg" style="width: 100%; margin-top: 10px;">নিবন্ধন করুন</button>
+                        </form>
+
+                        <!-- Registration OTP Verification Step (hidden initially) -->
+                        <div id="regOtpVerification" style="display: none;">
+                            <div class="form-instructions text-center" style="margin-bottom: 20px;">
+                                <h3 style="font-family: var(--font-headings); font-weight: 700; color: var(--color-text-dark);">ওটিপি কোড যাচাই</h3>
+                                <p style="color: var(--color-text-muted); font-size: 0.9rem;">আপনার মোবাইল নম্বরে পাঠানো ওটিপি কোডটি নিচে দিন।</p>
+                            </div>
+                            <div class="form-input-group">
+                                <label for="regOtpCode">ওটিপি (OTP) <span class="req">*</span></label>
+                                <input type="text" id="regOtpCode" placeholder="৬ সংখ্যার ওটিপি লিখুন">
+                            </div>
+                            <button type="button" id="btnVerifyRegOTP" class="btn btn-primary btn-lg" style="width: 100%; margin-top: 10px;">ওটিপি যাচাই ও অ্যাকাউন্ট তৈরি</button>
+                            <button type="button" id="btnCancelRegOTP" class="btn btn-secondary btn-lg" style="width: 100%; margin-top: 10px;">ফিরে যান (Cancel)</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Toast Notifications -->
+    <div class="toast" id="submitToast">
+        <div class="toast-content">
+            <i class="fa-solid fa-circle-check toast-icon" id="toastIcon"></i>
+            <div class="toast-message">
+                <span class="toast-title" id="toastTitle">সাফল্য!</span>
+                <span class="toast-desc" id="toastDesc">আপনার কাজ সফল হয়েছে।</span>
+            </div>
+        </div>
+        <button class="toast-close" id="toastClose">&times;</button>
+    </div>
+
+    <!-- Script loading -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-client.js"></script>
+    <script type="module" src="login.js?v=2.2.0"></script>
+    <script>
+        // Simple drawer control for responsiveness
+        const menuToggle = document.getElementById('menuToggle');
+        const closeDrawer = document.getElementById('closeDrawer');
+        const mobileDrawer = document.getElementById('mobileDrawer');
+        const drawerOverlay = document.getElementById('drawerOverlay');
+
+        if (menuToggle && mobileDrawer && drawerOverlay) {
+            menuToggle.addEventListener('click', () => {
+                mobileDrawer.classList.add('active');
+                drawerOverlay.classList.add('active');
+            });
+        }
+        if (closeDrawer && mobileDrawer && drawerOverlay) {
+            closeDrawer.addEventListener('click', () => {
+                mobileDrawer.classList.remove('active');
+                drawerOverlay.classList.remove('active');
+            });
+        }
+        if (drawerOverlay && mobileDrawer) {
+            drawerOverlay.addEventListener('click', () => {
+                mobileDrawer.classList.remove('active');
+                drawerOverlay.classList.remove('active');
+            });
+        }
+    </script>
+</body>
+</html>

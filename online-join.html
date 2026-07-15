@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Membership Registration | বারো মাসে তেরো পার্বণ</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Sans+Bengali:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Supabase JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- html2pdf.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <!-- Base and Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="online-join.css">
+
+    <link rel="icon" type="image/png" href="assets/logo.png">
+</head>
+<body class="bg-light">
+
+    <!-- Header -->
+    <header class="navbar-header scrolled">
+        <div class="nav-container" style="justify-content: center;">
+            <a href="index.html" class="logo-link">
+                <div class="logo-wrapper">
+                    <img src="assets/logo.png" alt="লোগো" class="logo-img">
+                    <span class="logo-text">বারো মাসে তেরো পার্বণ</span>
+                </div>
+            </a>
+        </div>
+    </header>
+
+    <div class="container main-container" style="margin-top: 100px; max-width: 800px; padding-bottom: 50px;">
+        
+        <div class="registration-header text-center" style="margin-bottom: 30px;">
+            <h1 class="page-title" style="font-family: var(--font-headings); color: var(--color-primary);">বারো মাসে তেরো পার্বণ</h1>
+            <h3 class="page-subtitle" style="color: var(--color-text-dark); margin-top: 5px;">Official Membership Registration</h3>
+            <p class="page-desc" style="color: var(--color-text-muted);">Please complete the form below to register online.</p>
+        </div>
+
+        <!-- Form Container -->
+        <div id="formContainer" class="form-card" style="background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.05);">
+            <form id="onlineRegistrationForm">
+                
+                <!-- Full Name -->
+                <div class="form-group" style="margin-bottom: 20px;">
+                    <label style="display:block; margin-bottom: 8px; font-weight: 600;">Name / আবেদনকারীর নাম <span class="req" style="color:red;">*</span></label>
+                    <input type="text" id="regName" required placeholder="Enter your full name" style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px;">
+                </div>
+
+                <!-- Mobile & OTP -->
+                <div class="form-group" style="margin-bottom: 20px;">
+                    <label style="display:block; margin-bottom: 8px; font-weight: 600;">Mobile Number / মোবাইল নম্বর <span class="req" style="color:red;">*</span></label>
+                    <div class="otp-group" style="display: flex; gap: 10px;">
+                        <input type="tel" id="regMobile" required placeholder="+91 XXXXXXXXXX" style="flex: 1; padding: 12px; border: 1px solid #ccc; border-radius: 6px;">
+                        <button type="button" id="btnSendOtp" class="btn btn-outline" style="padding: 0 20px;">Send OTP</button>
+                    </div>
+                </div>
+
+                <div class="form-group" id="otpVerificationGroup" style="display: none; margin-bottom: 20px;">
+                    <label style="display:block; margin-bottom: 8px; font-weight: 600;">Enter OTP / ওটিপি <span class="req" style="color:red;">*</span></label>
+                    <div class="otp-group" style="display: flex; gap: 10px;">
+                        <input type="text" id="regOtp" placeholder="6-digit OTP" style="flex: 1; padding: 12px; border: 1px solid #ccc; border-radius: 6px;">
+                        <button type="button" id="btnVerifyOtp" class="btn btn-secondary" style="padding: 0 20px;">Verify</button>
+                    </div>
+                    <span id="otpStatus" class="status-msg" style="display: block; margin-top: 5px; font-size: 0.85rem;"></span>
+                </div>
+
+                <!-- Permanent Address -->
+                <div class="form-group" style="margin-bottom: 20px;">
+                    <label style="display:block; margin-bottom: 8px; font-weight: 600;">Permanent Address (As per Aadhaar) / স্থায়ী ঠিকানা <span class="req" style="color:red;">*</span></label>
+                    <textarea id="regPermanentAddress" rows="3" required placeholder="Enter permanent address as per Aadhaar" style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; resize: vertical;"></textarea>
+                </div>
+
+                <!-- Present Address -->
+                <div class="form-group" style="margin-bottom: 20px;">
+                    <label style="display:block; margin-bottom: 8px; font-weight: 600;">Present Address (If staying locally/temporarily) / বর্তমান ঠিকানা <span class="req" style="color:red;">*</span></label>
+                    <textarea id="regPresentAddress" rows="3" required placeholder="Enter present address (Write 'Same as above' if unchanged)" style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; resize: vertical;"></textarea>
+                </div>
+
+                <!-- Aadhaar details -->
+                <div class="form-group" style="margin-bottom: 20px;">
+                    <label style="display:block; margin-bottom: 8px; font-weight: 600;">Aadhaar No. / আধার নম্বর <span class="req" style="color:red;">*</span></label>
+                    <input type="text" id="regAadhaarNo" required placeholder="12-digit Aadhaar number" style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px;">
+                </div>
+
+                <div class="form-group" style="margin-bottom: 20px;">
+                    <label style="display:block; margin-bottom: 8px; font-weight: 600;">Upload Aadhaar Image / আধার ছবি <span class="req" style="color:red;">*</span></label>
+                    <div class="file-upload-wrapper" style="position: relative;">
+                        <input type="file" id="regAadhaarImg" accept="image/*" required class="file-upload-input" style="position: absolute; width: 100%; height: 100%; opacity: 0; cursor: pointer;">
+                        <div class="file-upload-custom" style="padding: 15px; border: 2px dashed #ccc; border-radius: 6px; text-align: center; color: #666;">
+                            <i class="fa-solid fa-id-card"></i>
+                            <span class="file-upload-text">Choose Aadhaar Image (Max 500KB)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Passport Photo -->
+                <div class="form-group" style="margin-bottom: 20px;">
+                    <label style="display:block; margin-bottom: 8px; font-weight: 600;">Passport Photo / পাসপোর্ট ছবি <span class="req" style="color:red;">*</span></label>
+                    <div class="file-upload-wrapper" style="position: relative;">
+                        <input type="file" id="regPassportImg" accept="image/*" required class="file-upload-input" style="position: absolute; width: 100%; height: 100%; opacity: 0; cursor: pointer;">
+                        <div class="file-upload-custom" style="padding: 15px; border: 2px dashed #ccc; border-radius: 6px; text-align: center; color: #666;">
+                            <i class="fa-solid fa-user-tie"></i>
+                            <span class="file-upload-text">Choose Passport Photo (Max 500KB)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Signature -->
+                <div class="form-group" style="margin-bottom: 20px;">
+                    <label style="display:block; margin-bottom: 8px; font-weight: 600;">Signature / স্বাক্ষর <span class="req" style="color:red;">*</span><br><small style="font-weight: 400; color: #666; font-size: 0.85em;">(Please upload a clear photo of your signature done on a white paper)</small></label>
+                    <div class="file-upload-wrapper" style="position: relative;">
+                        <input type="file" id="regSignatureImg" accept="image/*" required class="file-upload-input" style="position: absolute; width: 100%; height: 100%; opacity: 0; cursor: pointer;">
+                        <div class="file-upload-custom" style="padding: 15px; border: 2px dashed #ccc; border-radius: 6px; text-align: center; color: #666;">
+                            <i class="fa-solid fa-signature"></i>
+                            <span class="file-upload-text">Choose Signature Image (Max 500KB)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Declaration -->
+                <div class="form-group declaration-box" style="margin-bottom: 30px; background: #fffde7; padding: 15px; border-left: 4px solid #f39c12; border-radius: 4px;">
+                    <label class="checkbox-container" style="display: flex; gap: 10px; cursor: pointer; align-items: flex-start;">
+                        <input type="checkbox" id="regDeclaration" required style="margin-top: 5px; transform: scale(1.2);">
+                        <div class="declaration-text" style="font-size: 0.9rem; line-height: 1.5;">
+                            <strong>DECLARATION AND PLEDGES</strong><br><br>
+                            I hereby declare that the personal details provided on this registration portal are correct. I confirm that I will pay the mandatory <strong>registration fee of ₹100</strong> and understand that I must send my <strong>Payment Screenshot</strong> via WhatsApp to complete my membership.
+                        </div>
+                    </label>
+                </div>
+
+                <button type="submit" id="btnSubmitForm" class="btn btn-primary btn-lg" style="width: 100%;">Proceed to Payment <i class="fa-solid fa-arrow-right"></i></button>
+            </form>
+        </div>
+
+        <!-- Premium Success & Payment Section -->
+        <div id="paymentContainer" class="success-section" style="display: none; background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%); border-radius: 20px; padding: 50px 30px;">
+            <div style="max-width: 650px; margin: 0 auto;">
+                
+                <!-- Success Header -->
+                <div class="success-header text-center" style="margin-bottom: 40px; animation: fadeInDown 0.8s ease;">
+                    <div class="success-checkmark" style="width: 80px; height: 80px; background: #27ae60; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; box-shadow: 0 10px 30px rgba(39, 174, 96, 0.3);">
+                        <i class="fa-solid fa-check" style="color: white; font-size: 40px;"></i>
+                    </div>
+                    <h2 style="font-size: 2rem; font-weight: 800; color: #2c3e50; margin-bottom: 10px;">Application Received!</h2>
+                    <p style="color: #555; font-size: 1.1rem; line-height: 1.6;">Your membership application has been saved.<br>To complete the process, please make the payment using the QR Code below.</p>
+                </div>
+
+                <!-- Registration ID Card -->
+                <div class="glass-card id-card" style="background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.8); border-radius: 20px; padding: 30px; text-align: center; box-shadow: 0 15px 35px rgba(0,0,0,0.05); margin-bottom: 30px; animation: fadeInUp 0.8s ease 0.2s both;">
+                    <p style="font-size: 0.9rem; color: #7f8c8d; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; margin-bottom: 10px;">Your Membership ID</p>
+                    <h2 id="successRegId" style="font-size: 2.2rem; font-weight: 900; color: #f39c12; letter-spacing: 2px; margin-bottom: 20px;">BMTP-MEM-XXXXXX</h2>
+                    <button id="copyIdBtn" class="btn btn-outline" style="border-radius: 50px; padding: 10px 25px; font-weight: 600; transition: all 0.3s; border-color: #f39c12; color: #f39c12; cursor: pointer; background: transparent;">
+                        <i class="fa-regular fa-copy"></i> Copy Membership ID
+                    </button>
+                </div>
+
+                <!-- Payment Card -->
+                <div class="glass-card payment-card" style="background: #ffffff; border-radius: 20px; padding: 40px 30px; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.08); margin-bottom: 30px; animation: fadeInUp 0.8s ease 0.4s both;">
+                    <h3 style="font-size: 1.5rem; font-weight: 800; color: #2c3e50; margin-bottom: 25px;">Complete Your Membership Payment</h3>
+                    
+                    <div class="qr-container" style="background: #f8f9fa; border-radius: 16px; padding: 20px; display: inline-block; box-shadow: inset 0 2px 10px rgba(0,0,0,0.02); margin-bottom: 25px;">
+                        <img src="qrs/Official Membership Registration 100.jpeg" alt="UPI QR Code" style="width: 220px; height: 220px; object-fit: contain; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                    </div>
+
+                    <div class="payment-details" style="display: flex; justify-content: center; gap: 40px; margin-bottom: 10px;">
+                        <div style="text-align: left;">
+                            <p style="font-size: 0.85rem; color: #7f8c8d; margin-bottom: 5px;">Registration Fee</p>
+                            <p style="font-size: 1.2rem; font-weight: 800; color: #2c3e50;">₹100</p>
+                        </div>
+                        <div style="text-align: left;">
+                            <p style="font-size: 0.85rem; color: #7f8c8d; margin-bottom: 5px;">Payment Method</p>
+                            <p style="font-size: 1.2rem; font-weight: 800; color: #2c3e50;">UPI QR Code</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Warning / Info Card -->
+                <div class="glass-card info-card" style="background: rgba(255, 243, 205, 0.6); backdrop-filter: blur(5px); border-left: 5px solid #ffc107; border-radius: 16px; padding: 25px; margin-bottom: 30px; box-shadow: 0 10px 25px rgba(0,0,0,0.03); animation: fadeInUp 0.8s ease 0.6s both;">
+                    <h4 style="font-size: 1.2rem; font-weight: 800; color: #856404; margin-bottom: 15px;"><i class="fa-solid fa-triangle-exclamation"></i> Important Instructions</h4>
+                    <ol style="padding-left: 20px; color: #664d03; line-height: 1.8; font-size: 0.95rem; font-weight: 500; margin-bottom: 15px;">
+                        <li>Complete the ₹100 payment using the QR Code.</li>
+                        <li><strong>Take a screenshot</strong> of the successful payment.</li>
+                        <li>Click the WhatsApp button below.</li>
+                        <li>Send the pre-filled message along with your <strong>Payment Screenshot</strong>.</li>
+                    </ol>
+                    <div style="background: rgba(220, 53, 69, 0.1); border-left: 4px solid #dc3545; padding: 12px 15px; border-radius: 4px; font-size: 0.9rem; color: #c0392b; line-height: 1.6;">
+                        <strong>Note:</strong> Your current Membership ID is <strong>Temporary</strong>. BMTP will provide you the Official Digital Membership Certificate where your Official Membership ID will be mentioned if your membership registration request is passed in verification process.
+                    </div>
+                </div>
+
+                <!-- WhatsApp Button -->
+                <div class="whatsapp-btn-container" style="text-align: center; animation: fadeInUp 0.8s ease 0.8s both;">
+                    <a href="#" id="whatsappBtn" class="btn" target="_blank" style="background: #25D366; color: white; border-radius: 50px; padding: 18px 30px; font-size: 1.1rem; font-weight: 700; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4); transition: transform 0.3s, box-shadow 0.3s; width: 100%; justify-content: center; text-decoration: none;">
+                        <i class="fa-brands fa-whatsapp" style="font-size: 1.5rem;"></i> Send Documents on WhatsApp
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+        <style>
+            @keyframes fadeInDown {
+                from { opacity: 0; transform: translateY(-30px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            @keyframes fadeInUp {
+                from { opacity: 0; transform: translateY(30px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            #whatsappBtn:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 15px 30px rgba(37, 211, 102, 0.5);
+                color: white;
+            }
+            #copyIdBtn:hover {
+                background: #f39c12 !important;
+                color: white !important;
+            }
+            .toast-notification {
+                position: fixed;
+                bottom: 30px;
+                left: 50%;
+                transform: translateX(-50%) translateY(100px);
+                background: #2c3e50;
+                color: white;
+                padding: 12px 25px;
+                border-radius: 50px;
+                font-weight: 600;
+                font-size: 0.95rem;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+                transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                z-index: 9999;
+                opacity: 0;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+            .toast-notification.show {
+                transform: translateX(-50%) translateY(0);
+                opacity: 1;
+            }
+        </style>
+        
+        <div id="copyToast" class="toast-notification"><i class="fa-solid fa-circle-check" style="color:#2ecc71;"></i> Membership ID Copied Successfully</div>
+
+        <!-- Memo Generation Step (Hidden initially, shown for printing) -->
+        <div id="memoContainerWrapper" style="display: none;">
+            <div id="memoContent" class="memo-document" style="background: #fff; padding: 40px; border-radius: 8px; max-width: 800px; margin: 0 auto; box-shadow: 0 0 20px rgba(0,0,0,0.1);">
+                <!-- Memo Header -->
+                <div class="memo-header" style="text-align: center; margin-bottom: 30px; border-bottom: 2px solid #eee; padding-bottom: 20px;">
+                    <img src="logo/80999dbc137045c79594baf77c5382ca.png" alt="BMTP Logo" style="max-width: 100px; margin: 0 auto 10px auto; display: block;">
+                    <h2 style="color: #2c3e50; font-family: 'Noto Sans Bengali', sans-serif; font-size: 2rem; margin-bottom: 5px;">বারো মাসে তেরো পার্বণ</h2>
+                    <p style="color: #f39c12; font-weight: bold; font-style: italic; margin-bottom: 15px;">Festival-এ থাকি, Festival-এ রাখি</p>
+                    <div class="memo-badge" style="background: #2c3e50; color: #fff; padding: 8px 20px; display: inline-block; border-radius: 4px; font-weight: bold; letter-spacing: 1px;">ONLINE MEMBERSHIP APPLICATION MEMO</div>
+                </div>
+
+                <div class="memo-status-box" style="text-align: center; border: 1px dashed #f39c12; padding: 15px; margin-bottom: 30px; border-radius: 6px; background: #fffdf5;">
+                    <p style="margin-bottom: 5px; color: #666; font-size: 0.9rem;">Application Current Status</p>
+                    <h3 style="color: #e67e22; margin: 0;">⏳ SUBMITTED (Waiting for Response)</h3>
+                </div>
+
+                <!-- Details Table -->
+                <div class="memo-section" style="margin-bottom: 30px;">
+                    <h4 class="memo-sec-title" style="border-left: 4px solid #3498db; padding-left: 10px; margin-bottom: 15px; font-size: 1.1rem; color: #2c3e50;"><i class="fa-solid fa-user" style="color:#3498db; margin-right:8px;"></i> Applicant & Form Details</h4>
+                    <table class="memo-table" style="width: 100%; border-collapse: collapse; border: 1px solid #ddd;">
+                        <tr>
+                            <td class="col-label" style="padding: 12px; border: 1px solid #ddd; background: #f9f9f9; width: 40%; font-weight: 600; color: #555;">Application Ref No.</td>
+                            <td id="memoRefNo" style="padding: 12px; border: 1px solid #ddd; color: #333;">BMTP/REG-2026/00000</td>
+                        </tr>
+                        <tr>
+                            <td class="col-label" style="padding: 12px; border: 1px solid #ddd; background: #f9f9f9; font-weight: 600; color: #555;">Applicant's Name</td>
+                            <td id="memoName" style="padding: 12px; border: 1px solid #ddd; color: #333;">[Name]</td>
+                        </tr>
+                        <tr>
+                            <td class="col-label" style="padding: 12px; border: 1px solid #ddd; background: #f9f9f9; font-weight: 600; color: #555;">Mobile Number</td>
+                            <td id="memoPhone" style="padding: 12px; border: 1px solid #ddd; color: #333;">[Phone]</td>
+                        </tr>
+                        <tr>
+                            <td class="col-label" style="padding: 12px; border: 1px solid #ddd; background: #f9f9f9; font-weight: 600; color: #555;">Permanent Address</td>
+                            <td id="memoPermanentAddress" style="padding: 12px; border: 1px solid #ddd; color: #333;">[Address]</td>
+                        </tr>
+                        <tr>
+                            <td class="col-label" style="padding: 12px; border: 1px solid #ddd; background: #f9f9f9; font-weight: 600; color: #555;">Present Address</td>
+                            <td id="memoPresentAddress" style="padding: 12px; border: 1px solid #ddd; color: #333;">[Address]</td>
+                        </tr>
+                        <tr>
+                            <td class="col-label" style="padding: 12px; border: 1px solid #ddd; background: #f9f9f9; font-weight: 600; color: #555;">Submission Date & Time</td>
+                            <td id="memoDate" style="padding: 12px; border: 1px solid #ddd; color: #333;">[Date]</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <!-- Payment Info -->
+                <div class="memo-section" style="margin-bottom: 30px;">
+                    <h4 class="memo-sec-title" style="border-left: 4px solid #f1c40f; padding-left: 10px; margin-bottom: 15px; font-size: 1.1rem; color: #2c3e50;"><i class="fa-solid fa-credit-card" style="color:#f1c40f; margin-right:8px;"></i> Payment Information</h4>
+                    <table class="memo-table" style="width: 100%; border-collapse: collapse; border: 1px solid #ddd;">
+                        <tr>
+                            <td class="col-label" style="padding: 12px; border: 1px solid #ddd; background: #f9f9f9; width: 40%; font-weight: 600; color: #555;">Registration Fee</td>
+                            <td style="padding: 12px; border: 1px solid #ddd; color: #333;">₹100.00 (One Hundred Rupees Only)</td>
+                        </tr>
+                        <tr>
+                            <td class="col-label" style="padding: 12px; border: 1px solid #ddd; background: #f9f9f9; font-weight: 600; color: #555;">Payment Mode</td>
+                            <td style="padding: 12px; border: 1px solid #ddd; color: #333;">Online (UPI / QR Scan)</td>
+                        </tr>
+                        <tr>
+                            <td class="col-label" style="padding: 12px; border: 1px solid #ddd; background: #f9f9f9; font-weight: 600; color: #555;">Transaction Status</td>
+                            <td style="padding: 12px; border: 1px solid #ddd; color: #27ae60; font-weight: bold;">✅ SUCCESSFUL</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <!-- Footer Instructions -->
+                <div class="memo-instructions" style="background: #f8f9fa; padding: 20px; border-radius: 6px; border-left: 4px solid #7f8c8d;">
+                    <h5 style="margin-bottom: 10px; font-size: 1rem; color: #2c3e50;">⚠️ গুরুত্বপূর্ণ নির্দেশনাবলী ও পরবর্তী পদক্ষেপ:</h5>
+                    <ul style="padding-left: 20px; font-size: 0.9rem; line-height: 1.6; color: #555; margin: 0;">
+                        <li style="margin-bottom: 8px;"><strong>ম্যানুয়াল ভেরিফিকেশন:</strong> আমাদের অফিসিয়াল এডমিন প্যানেল আগামী ২৪ থেকে ৪৮ ঘণ্টার মধ্যে আপনার দেওয়া সমস্ত তথ্য এবং সংযুক্ত নথিপত্র ম্যানুয়ালি যাচাই (Verify) করবে।</li>
+                        <li style="margin-bottom: 8px;"><strong>হোয়াটসঅ্যাপ আপডেট:</strong> আপনার আবেদনটি সফলভাবে মঞ্জুর (Approve) হলে, আমাদের অফিসিয়াল হোয়াটসঅ্যাপ নম্বর (9547407043) থেকে আপনাকে কনফার্মেশন মেসেজ পাঠানো হবে।</li>
+                        <li style="margin-bottom: 8px;"><strong>মেম্বারশিপ সার্টিফিকেট:</strong> আবেদন অনুমোদিত হওয়ার সাথে সাথে আপনার নির্দিষ্ট Membership ID জেনারেট হবে এবং আপনার অফিসিয়াল ডিজিটাল মেম্বারশিপ সার্টিফিকেটটি সরাসরি আপনার হোয়াটসঅ্যাপ নম্বরে পাঠিয়ে দেওয়া হবে।</li>
+                        <li><strong>সহায়তা:</strong> যেকোনো তথ্যের জন্য এই মেমো নম্বরটি উল্লেখ করে আমাদের অফিসিয়াল হোয়াটসঅ্যাপে যোগাযোগ করতে পারেন।</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 30px;">
+                <button id="btnDownloadMemo" class="btn btn-primary btn-lg"><i class="fa-solid fa-download"></i> Download Memo PDF</button>
+                <a href="index.html" class="btn btn-outline btn-lg" style="margin-left: 10px;">Return to Home</a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Rules Modal -->
+    <div id="rulesModal" class="custom-modal-overlay" style="display: none;">
+        <div class="custom-modal" style="max-width: 600px; max-height: 90vh; overflow-y: auto; text-align: left; padding: 30px 20px;">
+            <button class="custom-modal-close" onclick="document.getElementById('rulesModal').style.display='none';">&times;</button>
+            <h3 style="margin-top: 0; color: var(--color-primary); font-family: var(--font-headings); margin-bottom: 15px; font-size: 1.4rem;">সাংগঠনিক নিয়মাবলী, দায়িত্ব ও আচরণবিধি</h3>
+            <p style="color: var(--color-text-dark); font-weight: bold; margin-bottom: 15px;">(Constitutional Rules & Code of Conduct)</p>
+            <p style="color: var(--color-text-dark); margin-bottom: 15px; line-height: 1.6; font-size: 0.95rem;">'বারো মাসে তেরো পার্বণ' সংগঠনের অফিশিয়াল সদস্যপদ গ্রহণের মাধ্যমে, প্রত্যেক নিবন্ধিত সদস্য ক্লাবের প্রশাসনিক কাঠামোর অধীনে প্রতিষ্ঠিত সাধারণ নিয়ম ও শর্তাবলী মেনে চলতে বাধ্য থাকবেন। আমাদের সাংস্কৃতিক কার্যক্রমের মর্যাদা, স্বচ্ছতা এবং শৃঙ্খলা বজায় রাখার জন্য এই নিয়মগুলো নির্ধারণ করা হয়েছে:</p>
+            
+            <ul style="padding-left: 0; list-style: none; margin-bottom: 20px; color: var(--color-text-dark); font-size: 0.95rem; line-height: 1.6;">
+                <li style="margin-bottom: 15px;">
+                    <strong style="color: var(--color-primary);">⏳ 1. আর্থিক সততা, মাসিক ফি ও উৎসবের চাঁদা (Financial Guidelines):</strong><br>
+                    <strong>মাসিক মেম্বারশিপ ফি:</strong> সংগঠনের প্রতিটি নিবন্ধিত সদস্যকে প্রতি মাসে ৫০/- টাকা (Fifty Rupees Only) মাসিক মেম্বারশিপ চার্জ হিসেবে বাধ্যতামূলকভাবে জমা দিতে হবে。<br>
+                    <strong>উৎসবের অনুদান/চাঁদা:</strong> আমাদের বার্ষিক বড় উৎসবগুলোর (যেমন- মহাধুমধামে আয়োজিত গণেশ পূজা) জন্য প্রত্যেক সদস্যকে বোর্ড মেম্বারদের দ্বারা নির্ধারিত চাঁদা বা অনুদান বাধ্যতামূলকভাবে প্রদান করতে হবে। এই চাঁদার পরিমাণ সংগঠনের বোর্ড অথরিটি (Board Authority) দ্বারা নির্দিষ্ট করা হবে。<br>
+                    <strong>তহবিল জমা:</strong> জনসাধারণের কাছ থেকে কোনো সদস্যের দ্বারা সংগৃহীত যেকোনো তহবিল, চাঁদা বা স্পনসরশিপের টাকা অবিলম্বে ক্যাশিয়ার (Treasurer)-এর কাছে জমা দিতে হবে। দাতাদের শুধুমাত্র অফিশিয়াল এবং সিরিয়াল নম্বরযুক্ত ক্লাবের রসিদ (Receipt) দেওয়ার অনুমতি রয়েছে।
+                </li>
+                <li style="margin-bottom: 15px;">
+                    <strong style="color: var(--color-primary);">🌺 ২. সাংস্কৃতিক পরিচয়ের প্রতি দায়বদ্ধতা (Cultural Commitment):</strong><br>
+                    প্রত্যেক সদস্য বাংলার উৎসবের ঐতিহ্য এবং সমৃদ্ধ সংস্কৃতিকে বাঁচিয়ে রাখতে ও ছড়িয়ে দিতে অগ্রাধিকার দেবেন এবং সক্রিয়ভাবে কাজ করবেন। আমাদের বছরব্যাপী ইভেন্টগুলোর সফল রূপায়নে আপনার সহযোগিতামূলক মনোভাব এবং উৎসর্গ অত্যন্ত প্রয়োজন।
+                </li>
+                <li style="margin-bottom: 15px;">
+                    <strong style="color: var(--color-primary);">🤝 ৩. গণেশ পূজা ভলান্টিয়ার সার্ভিস (Volunteering):</strong><br>
+                    আমাদের বার্ষিক গণেশ পূজা উদযাপনের সময়, সমস্ত সক্রিয় সদস্যকে বাধ্যতামূলকভাবে স্বেচ্ছাসেবক (Volunteer) হিসেবে দায়িত্ব পালন করতে হবে। মণ্ডপ পরিচালনা, লাইন নিয়ন্ত্রণ, নিরাপত্তা, প্রসাদ বিতরণ এবং সমন্বয়ের মতো কাজগুলো ক্লাব ম্যানেজারের প্রত্যক্ষ তত্ত্বাবধানে কঠোরভাবে বন্টন করা হবে।
+                </li>
+                <li style="margin-bottom: 15px;">
+                    <strong style="color: var(--color-primary);">🚨 ৪. স্থানীয় নিয়মকানুনের প্রতি শ্রদ্ধা (Compliance):</strong><br>
+                    যেকোনো সার্বজনীন শোভাযাত্রা বা অনুষ্ঠানের সময় পশ্চিমবঙ্গ পুলিশ, মিউনিসিপ্যালিটি গাইডলাইন, অগ্নিসুরক্ষা এবং স্থানীয় প্রশাসনের সমস্ত নিরাপত্তা মানদণ্ড সম্পূর্ণভাবে মেনে চলার জন্য সদস্যদের অবশ্যই সভাপতি (President) এবং সাধারণ সম্পাদকের (General Secretary) সাথে সমন্বয় বজায় রাখতে হবে।
+                </li>
+                <li style="margin-bottom: 15px;">
+                    <strong style="color: var(--color-primary);">🏢 ৫. ক্লাবের সম্পত্তির রক্ষণাবেক্ষণ (Asset Protection):</strong><br>
+                    ক্লাবের সমস্ত সম্পত্তি, সরঞ্জাম, ডেকোরেশনের জিনিসপত্র এবং ভৌত স্থান ক্লাব ম্যানেজারের নিয়ন্ত্রণে থাকবে। কোনো সদস্যের অবহেলার কারণে কোনো জিনিসের ক্ষতি হলে বা হারিয়ে গেলে, সংশ্লিষ্ট সদস্যকে তার ক্ষতিপূরণ দিতে হবে।
+                </li>
+                <li style="margin-bottom: 15px;">
+                    <strong style="color: var(--color-primary);">🤐 ৬. গোপনীয়তা এবং একতা (Confidentiality & Unity):</strong><br>
+                    ক্লাবের অভ্যন্তরীণ পরিকল্পনা, কার্যনির্বাহী আলোচনা এবং লজিস্টিকাল কোনো বিবাদ থাকলে তা কমিটির কাঠামোর মধ্যেই গোপন রাখতে হবে। কার্যনির্বাহী পদাধিকারীদের (সভাপতি, সম্পাদক, ক্যাশিয়ার এবং ম্যানেজার) দ্বারা নেওয়া যেকোনো সিদ্ধান্তই চূড়ান্ত এবং বাধ্যতামূলক বলে গণ্য হবে।
+                </li>
+            </ul>
+            <div style="text-align: center;">
+                <button type="button" class="btn btn-primary" onclick="document.getElementById('rulesModal').style.display='none';">I Understand</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="supabase-client.js"></script>
+    <script src="online-join.js"></script>
+</body>
+</html>
